@@ -9,11 +9,15 @@
   "author": "Daijie Liu",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.2",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
