@@ -1,5 +1,5 @@
 import session from 'express-session';
-import authenticate from './authenticate';
+import passport from './authenticate';
 import dotenv from 'dotenv';
 import express from 'express';
 import './db';
@@ -21,16 +21,12 @@ const errHandler = (err, req, res, next) => {
 
 const app = express();
 app.use(express.json());
-app.use(session({
-  secret: 'ilikecake',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(passport.initialize());
 
 const port = process.env.PORT;
 
 // app.use(express.static('public'));
-app.use('/api/movies', authenticate, moviesRouter);
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
 
