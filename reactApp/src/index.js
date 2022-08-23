@@ -3,6 +3,7 @@ import React from "react";
   import { BrowserRouter, Route, Redirect, Switch, Link } from "react-router-dom";
   import { PublicPage, Movies, Profile, HomePage } from "./pages";
   import LoginPage from "./loginPage";
+  import SignUpPage from "./signUpPage";
   import AuthProvider from "./authContext";
   import PrivateRoute from "./privateRoute";
   import AuthHeader from "./authHeader";
@@ -30,6 +31,7 @@ import React from "react";
             <Route path="/public" component={PublicPage} />
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
+            <Route path="/signup" component={SignUpPage} />
             <PrivateRoute path="/movies" component={Movies} />
             <PrivateRoute path="/profile" component={Profile} />
             <Redirect from="*" to="/" />
