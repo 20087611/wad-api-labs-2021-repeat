@@ -1,23 +1,25 @@
 import express from 'express';
+import asyncHandler from 'express-async-handler';
+import Genre from './genreModel';
 import { genres } from './genresData';
 
 const router = express.Router();
 
 // get all genres
-router.get('/', (req, res) => {
-    res.json(genres);
+router.get('/', async (req, res) => {
+    const genres = await Genre.find();
+    res.status(200).json(genres);
 });
 
 // get genre by id
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    if ( genres.genres.some(g => g.id == id) ) {
-        res.status(200).json( genres.genres.find(g => g.id == id) );
+    const genres = await Genre.find();
+    
+    if (genres.some(g => g.id == id)) {
+        res.status(200).json(genres.find(g => g.id == id));
     } else {
-        res.status(404).json({
-            message: 'The resource you requested could not be found.',
-            status_code: 404
-        });
+        res.status(404).json({ code: 404, msg: 'Unable to find genre' });
     }
 });
 
