@@ -8,6 +8,8 @@ import personModel from '../api/persons/personModel';
 import persons from './persons.js';
 import tvModel from '../api/tvs/tvModel';
 import tvs from './tvs.js';
+import keywordModel from '../api/keywords/keywordModel';
+import keywords from './keywords';
 
 import dotenv from 'dotenv';
 
@@ -73,10 +75,22 @@ export async function loadTVs() {
   }
 }
 
+export async function loadKeywords() {
+  console.log('load keyword Data');
+  try {
+    await keywordModel.deleteMany();
+    await keywordModel.collection.insertMany(keywords);
+    console.info(`${keywords.length} keywords were successfully stored.`);
+  } catch (err) {
+    console.error(`failed to Load keyword Data: ${err}`);
+  }
+}
+
 if (process.env.SEED_DB == 'True') {
   loadUsers();
   loadGenres();
   loadMovies();
   loadPersons();
   loadTVs();
+  loadKeywords();
 }
