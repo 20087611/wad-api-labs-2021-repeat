@@ -10,6 +10,8 @@ import tvModel from '../api/tvs/tvModel';
 import tvs from './tvs.js';
 import keywordModel from '../api/keywords/keywordModel';
 import keywords from './keywords';
+import companyModel from '../api/companies/companyModel';
+import companies from './companies';
 
 import dotenv from 'dotenv';
 
@@ -86,6 +88,17 @@ export async function loadKeywords() {
   }
 }
 
+export async function loadCompanies() {
+  console.log('load company Data');
+  try {
+    await companyModel.deleteMany();
+    await companyModel.collection.insertMany(companies);
+    console.info(`${companies.length} companies were successfully stored.`);
+  } catch (err) {
+    console.error(`failed to Load company Data: ${err}`);
+  }
+}
+
 if (process.env.SEED_DB == 'True') {
   loadUsers();
   loadGenres();
@@ -93,4 +106,5 @@ if (process.env.SEED_DB == 'True') {
   loadPersons();
   loadTVs();
   loadKeywords();
+  loadCompanies();
 }

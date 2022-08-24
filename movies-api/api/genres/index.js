@@ -1,7 +1,5 @@
 import express from 'express';
-import asyncHandler from 'express-async-handler';
 import Genre from './genreModel';
-import { genres } from './genresData';
 
 const router = express.Router();
 

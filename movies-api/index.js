@@ -10,6 +10,7 @@ import usersRouter from './api/users';
 import personsRouter from './api/persons';
 import tvsRouter from './api/tvs';
 import keywordsRouter from './api/keywords';
+import companiesRouter from './api/companies';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRou
 app.use('/api/persons', passport.authenticate('jwt', {session: false}), personsRouter);
 app.use('/api/tvs', passport.authenticate('jwt', {session: false}), tvsRouter);
 app.use('/api/keywords', keywordsRouter);
+app.use('/api/companies', companiesRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
 
