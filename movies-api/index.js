@@ -7,6 +7,7 @@ import './seedData'
 import moviesRouter from './api/movies';
 import genresRouter from './api/genres';
 import usersRouter from './api/users';
+import personsRouter from './api/persons';
 
 dotenv.config();
 
@@ -27,12 +28,18 @@ const port = process.env.PORT;
 
 // app.use(express.static('public'));
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
+app.use('/api/persons', passport.authenticate('jwt', {session: false}), personsRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
 
 
 app.use(errHandler);
 
-app.listen(port, () => {
+// app.listen(port, () => {
+//   console.info(`Server running at ${port}`);
+// });
+
+let server = app.listen(port, () => {
   console.info(`Server running at ${port}`);
 });
+module.exports = server
