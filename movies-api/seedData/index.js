@@ -1,18 +1,16 @@
 import userModel from '../api/users/userModel';
 import users from './users';
+
 import genreModel from '../api/genres/genreModel';
-import genres from './genres';
 import movieModel from '../api/movies/movieModel';
-import movies from './movies.js';
 import personModel from '../api/persons/personModel';
-import persons from './persons.js';
 import tvModel from '../api/tvs/tvModel';
-import tvs from './tvs.js';
 import keywordModel from '../api/keywords/keywordModel';
-import keywords from './keywords';
 import companyModel from '../api/companies/companyModel';
+import keywords from './keywords';
 import companies from './companies';
 
+import { getGenres, getMovies, getPersons, getTVs, getMovieReviews, getUpcomingMovies, getNowPlayingMovies, getPopularMovies, getTopRatedMovies } from '../api/tmdb-api';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -32,6 +30,7 @@ async function loadUsers() {
 async function loadGenres() {
   console.log('load genre Data');
   try {
+    const genres = await getGenres();
     await genreModel.deleteMany();
     await genreModel.collection.insertMany(genres);
     console.info(`${genres.length} genres were successfully stored.`);
@@ -42,9 +41,9 @@ async function loadGenres() {
 
 // deletes all movies documents in collection and inserts test data
 export async function loadMovies() {
-  console.log('load seed data');
-  console.log(movies.length);
+  console.log('load movie data');
   try {
+    const movies = await getMovies();
     await movieModel.deleteMany();
     await movieModel.collection.insertMany(movies);
     console.info(`${movies.length} Movies were successfully stored.`);
@@ -55,8 +54,8 @@ export async function loadMovies() {
 
 export async function loadPersons() {
   console.log('load person data');
-  console.log(persons.length);
   try {
+    const persons = await getPersons();
     await personModel.deleteMany();
     await personModel.collection.insertMany(persons);
     console.info(`${persons.length} Persons were successfully stored.`);
@@ -67,8 +66,8 @@ export async function loadPersons() {
 
 export async function loadTVs() {
   console.log('load TV data');
-  console.log(tvs.length);
   try {
+    const tvs = await getTVs();
     await tvModel.deleteMany();
     await tvModel.collection.insertMany(tvs);
     console.info(`${tvs.length} TVs were successfully stored.`);
