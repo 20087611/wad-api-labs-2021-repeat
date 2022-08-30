@@ -107,8 +107,7 @@ export const getMovies = () => {
 
 ## Independent learning
 
-. . State the non-standard aspects of React/Express/Node (or other related technologies) that you researched and applied in this assignment . .  
+State the non-standard aspects of React/Express/Node (or other related technologies) that you researched and applied in this assignment
 =======
 # Web App Dev 2: Web API Labs
  
->>>>>>> ebc789caba6d2762dc74e36897d541cf22ef95ae
